@@ -1,0 +1,72 @@
+# built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+# generated files
+bin/
+gen/
+out/
+build/
+
+# Eclipse project files
+.classpath
+.project
+
+app/build/
+gradle.properties
+
+*.hprof
+
+buildSrc/.gradle/
+buildSrc/build/
+
+# sensetive
+app/release
+app/debug
+app/google-services.json
+signing
+
+# IDEA/Android Studio project files, because
+# the project can be imported from settings.gradle.kts
+*.iml
+.idea/*
+!.idea/copyright
+# Keep the code styles.
+!/.idea/codeStyles
+/.idea/codeStyles/*
+!/.idea/codeStyles/Project.xml
+!/.idea/codeStyles/codeStyleConfig.xml
+
+xcuserdata/
+!**/build/
+local.properties
+/local.properties
+secrets.properties
+.DS_Store
+.externalNativeBuild
+.cxx
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcodeproj/project.xcworkspace/
+!*.xcworkspace/contents.xcworkspacedata
+**/xcshareddata/WorkspaceSettings.xcsettings
+
+# Gradle cache
+.gradle
+
+# Kotlin cache
+.kotlin
+
+# Sandbox stuff
+_sandbox
+
+# Android Studio captures folder
+captures/
+/.kotlin/sessions
+/.kotlin/errors

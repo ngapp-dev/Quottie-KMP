@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "847065441914",
+    "project_id": "quottie-390014",
+    "storage_bucket": "quottie-390014.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847065441914:android:e2cb0ee75a33cca4c53dc3",
+        "android_client_info": {
+          "package_name": "com.ngapp.quottie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "847065441914-rijgqq43djen2mabf1ukner3eml70lro.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDWc35jwai-X37juB39usOxyXVQJg0UpQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "847065441914-rijgqq43djen2mabf1ukner3eml70lro.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-9018645848650347~2485909297"
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847065441914:android:c3cab50e4179ab45c53dc3",
+        "android_client_info": {
+          "package_name": "com.ngapp.quottie.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "847065441914-rijgqq43djen2mabf1ukner3eml70lro.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDWc35jwai-X37juB39usOxyXVQJg0UpQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "847065441914-rijgqq43djen2mabf1ukner3eml70lro.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

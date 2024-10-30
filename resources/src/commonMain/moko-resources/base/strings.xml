@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2024 NGApps Dev (https://github.com/ngapp-dev). All rights reserved.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <string name="title_quottie">Quottie</string>
+
+    <!-- General -->
+    <string name="not_connected">⚠️ You aren’t connected to the internet</string>
+
+    <!-- Top level destinations -->
+    <string name="destination_quotes">Quotes</string>
+    <string name="destination_authors">Authors</string>
+    <string name="destination_bookmarks">Bookmarks</string>
+    <string name="destination_settings">Settings</string>
+    <string name="destination_search">Search</string>
+    <string name="destination_navigate_back">Back</string>
+    <string name="destination_author_detail">Author</string>
+    <string name="destination_share">Share</string>
+    <string name="destination_about">About</string>
+
+    <!-- Errors -->
+    <string name="error_bad_request">Bad request</string>
+    <string name="error_verification_code">Incorrect verification code</string>
+    <string name="error_not_authorized">You are not authorized</string>
+    <string name="error_no_such_email">Account with this e-mail doesn\'t exist</string>
+    <string name="error_the_request_timed_out">The request timed out</string>
+    <string name="error_youve_hit_your_rate_limit">You\'ve hit your rate limit</string>
+    <string name="error_no_internet">Oops! It seems like your internet connection is slow or
+        disrupted. Please check your network connection and try again.
+    </string>
+    <string name="error_file_too_large">The file you tried to upload was too large.</string>
+    <string name="error_server_error">Sorry, we are experiencing some technical difficulties.
+        Please, try again later.
+    </string>
+    <string name="error_unknown_error">An unknown error occurred</string>
+    <string name="error_forbidden">You are not logged in</string>
+    <string name="error_disk_full">
+        Failed to save the item because your device\'s disk is full
+    </string>
+
+    <!-- Other -->
+    <string name="no_items">No items</string>
+
+    <!-- Buttons -->
+    <string name="button_try_again">Try again</string>
+
+    <!-- Titles -->
+    <string name="title_quote_of_the_day">Quote of the day</string>
+    <string name="title_random_quotes">Random Quotes</string>
+    <string name="title_inspire_yourself">Inspire yourself</string>
+
+    <!-- Settings -->
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_dark_mode">Dark mode</string>
+    <string name="settings_legal">Legal</string>
+    <string name="settings_terms_and_conditions"><![CDATA[Terms & Conditions]]></string>
+    <string name="settings_privacy_policy">Privacy Policy</string>
+    <string name="settings_software_license">Software License</string>
+    <string name="settings_support">Support</string>
+    <string name="settings_about">About</string>
+    <string name="settings_dark_mode_config_system_default">System default</string>
+    <string name="settings_dark_mode_config_light">Light</string>
+    <string name="settings_dark_mode_config_dark">Dark</string>
+    <string name="settings_text_confirmation">Confirmation</string>
+    <string name="settings_text_application_uses">This application uses the following external components:</string>
+    <string name="settings_text_google_analytics">Google Analytics</string>
+    <string name="settings_text_google_analytics_link">https://developers.google.com/analytics/terms</string>
+    <string name="settings_text_google_admob">Google AdMob</string>
+    <string name="settings_text_google_admob_link">https://developers.google.com/admob/terms</string>
+    <string name="settings_text_apache">Apache</string>
+    <string name="settings_text_apache_link">https://www.apache.org/licenses/LICENSE-2.0</string>
+
+    <!-- Bookmarks -->
+    <string name="bookmark_removed">Bookmark removed</string>
+    <string name="bookmark_undo">UNDO</string>
+    <string name="bookmark_empty">Your bookmark list is empty!</string>
+    <string name="bookmark_no_content_start">Find an inspiring</string>
+    <string name="bookmark_no_content_end">to save for later</string>
+
+    <!-- Search -->
+    <string name="search_title">Search</string>
+    <string name="search_clear_search_text_content_desc">Clear search text</string>
+    <string name="search_result_not_found">Sorry, there is no content found for your search \"%1$s\"</string>
+    <string name="search_not_ready">Sorry, we are still processing the search index. Please come back later</string>
+    <string name="search_try_another_search">Try another search or explorer </string>
+    <string name="search_interests">Interests</string>
+    <string name="search_to_browse_topics"> to browse topics</string>
+    <string name="search_topics">Topics</string>
+    <string name="search_updates">Updates</string>
+    <string name="search_recent_searches">Recent searches</string>
+    <string name="search_clear_recent_searches_content_desc">Clear searches</string>
+
+    <!-- About -->
+    <string name="about_text_android_developer">Android Developer</string>
+    <string name="about_text_developed_by">Developed By</string>
+    <string name="about_text_copyright_explanation">Quottie application performs its functions using data obtained from open sources. All rights to the application belong to NGApps Dev</string>
+
+    <!-- Ads -->
+    <string name="loading_ad">Loading ad...</string>
+    <string name="change_consent">You can change your consent preferences for personalized ads at any time by clicking&#160;</string>
+    <string name="here">here</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_description_next_icon" translatable="false">Onboarding next icon</string>
+    <string name="onboarding_description_back_icon" translatable="false">Onboarding back icon</string>
+    <string name="onboarding_description_page_img" translatable="false">Onboarding page img</string>
+    <string name="onboarding_description_pager_indicator" translatable="false">Onboarding pager indicator</string>
+    <string name="onboarding_button_button_skip">Skip</string>
+    <string name="onboarding_button_get_started">Get started</string>
+    <string name="onboarding_title_quotes">Quotes</string>
+    <string name="onboarding_title_authors">Authors</string>
+    <string name="onboarding_title_bookmarks">Bookmarks</string>
+    <string name="onboarding_description_quotes">Explore a curated collection of inspiring quotes to uplift and motivate you.</string>
+    <string name="onboarding_description_authors">Discover famous authors and learn more about their timeless wisdom and contributions.</string>
+    <string name="onboarding_description_bookmarks">Create your own list of bookmarked quotes and authors for quick and easy access anytime.</string>
+
+</resources>

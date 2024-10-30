@@ -1,0 +1,21 @@
+<!--
+  - Copyright 2024 NGApps Dev (https://github.com/ngapp-dev). All rights reserved.
+  -
+  - Licensed under the Apache License, Version 2.0 (the "License");
+  - you may not use this file except in compliance with the License.
+  - You may obtain a copy of the License at
+  -
+  - http://www.apache.org/licenses/LICENSE-2.0
+  -
+  - Unless required by applicable law or agreed to in writing, software
+  - distributed under the License is distributed on an "AS IS" BASIS,
+  - WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  -
+  - See the License for the specific language governing permissions and
+  - limitations under the License.
+  -->
+
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M17 3H6.5C5.67157 3 5 3.67157 5 4.5V21C5.00014 21.2726 5.14815 21.5236 5.38659 21.6557C5.62503 21.7878 5.91636 21.7801 6.1475 21.6356L11.75 18.1341L17.3534 21.6356C17.5845 21.7796 17.8755 21.787 18.1136 21.655C18.3518 21.523 18.4997 21.2723 18.5 21V4.5C18.5 3.67157 17.8284 3 17 3ZM17 4.5V15.1472L12.1466 12.1144C11.9034 11.9624 11.5948 11.9624 11.3516 12.1144L6.5 15.1462V4.5H17ZM12.1466 16.6144C11.9034 16.4624 11.5948 16.4624 11.3516 16.6144L6.5 19.6472V16.9153L11.75 13.6341L17 16.9153V19.6472L12.1466 16.6144Z" fill="#405473"/>
+<path d="M17 4.5V15.1472L12.1466 12.1144C11.9034 11.9624 11.5948 11.9624 11.3516 12.1144L6.5 15.1462V4.5H17Z" fill="#405473"/>
+</svg>

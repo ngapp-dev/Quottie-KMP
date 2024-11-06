@@ -7,7 +7,8 @@ androidxCoreSplashscreen = "1.0.1"
 androidxDataStore = "1.1.1"
 androidxLifecycle = "2.8.2"
 buildkonfig = "0.15.1"
-compose = "1.7.4"
+coil = "3.0.0"
+compose = "1.7.5"
 composeNavigation = "2.8.0-alpha10"
 composePlugin = "1.7.0"
 dependencyGuard = "0.5.0"
@@ -20,7 +21,7 @@ googleMessagingPlatform = "3.0.0"
 googlePlayAppUpdate = "2.1.0"
 googlePlayReview = "2.0.2"
 junit = "4.13.2"
-kamel_image = "0.9.3"
+kamel_image = "1.0.1"
 koin = "4.0.0"
 koinAnnotations = "1.4.0-RC4"
 kotlin = "2.0.20"
@@ -31,7 +32,7 @@ kotlinxSerializationJson = "1.6.3"
 kottie = "2.0.1"
 kover = "0.7.5"
 ksp = "2.0.20-1.0.24"
-ktor = "2.3.12"
+ktor = "3.0.1"
 mokoParcelize = "0.9.0"
 mokoResources = "0.24.2"
 napier = "2.7.1"
@@ -52,12 +53,15 @@ arc-core-common = { group = "androidx.arch.core", name = "core-common", version.
 arc-core-runtime = { group = "androidx.arch.core", name = "core-runtime", version.ref = "androidxArch" }
 arc-core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "androidxArch" }
 buildkonfig-gradle-plugin = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin", version.ref = "buildkonfig" }
+coil = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
+coil-compose-core = { module = "io.coil-kt.coil3:coil-compose-core", version.ref = "coil" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
 com-google-devtools-ksp-gradle-plugin = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 compose-material3-adaptive = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive", version.ref = "adaptive" }
 compose-material3-adaptive-layout = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive-layout", version.ref = "adaptive" }
 compose-material3-adaptive-navigation = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive-navigation", version.ref = "adaptive" }
 compose-material3-adaptive-navigation-suite = { group = "org.jetbrains.compose.material3", name = "material3-adaptive-navigation-suite", version.ref = "composePlugin" }
-compose-material3-windowSizeClass = { group = "org.jetbrains.compose.material3", name = "material3-window-size-class", version.ref = "composePlugin" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 datastore = { module = "androidx.datastore:datastore-core-okio", version.ref = "androidxDataStore" }
 detekt-gradle-plugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
@@ -74,7 +78,6 @@ google-services = { module = "com.google.gms:google-services", version.ref = "gm
 google-services-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "googleAdmob" }
 gradle = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
-kamel = { group = "media.kamel", name = "kamel-image", version.ref = "kamel_image" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 koin-annotations = { group = "io.insert-koin", name = "koin-annotations", version.ref = "koinAnnotations" }
 koin-compiler = { group = "io.insert-koin", name = "koin-ksp-compiler", version.ref = "koinAnnotations" }

@@ -70,7 +70,6 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-            implementation(libs.compose.material3.windowSizeClass)
             implementation(libs.compose.material3.adaptive.navigation)
             implementation(libs.compose.material3.adaptive)
             implementation(libs.compose.material3.adaptive.layout)

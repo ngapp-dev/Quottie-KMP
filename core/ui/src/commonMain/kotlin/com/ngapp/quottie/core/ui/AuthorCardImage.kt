@@ -24,15 +24,18 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
 import com.ngapp.quottie.core.desingsystem.icon.QuottieIcons
 import dev.icerock.moko.resources.compose.painterResource
-import io.kamel.image.KamelImage
-import io.kamel.image.asyncPainterResource
 
 @Composable
 fun AuthorCardImage(
@@ -41,30 +44,24 @@ fun AuthorCardImage(
     contentScale: ContentScale = ContentScale.Crop,
     modifier: Modifier = Modifier
 ) {
+    var isLoadingOrError by remember { mutableStateOf(false) }
     val imageModifier = modifier
         .width(140.dp)
         .heightIn(max = 90.dp)
         .clip(MaterialTheme.shapes.medium)
 
     Box(modifier = imageModifier) {
-        if (!imageUrl.isNullOrEmpty()) {
-            KamelImage(
-                resource = asyncPainterResource(imageUrl),
-                contentScale = contentScale,
-                alignment = Alignment.TopCenter,
-                contentDescription = contentDescription,
-                modifier = Modifier.fillMaxSize(),
-                onLoading = {
-                    Image(
-                        painter = painterResource(QuottieIcons.LogoMono),
-                        contentScale = ContentScale.Crop,
-                        alignment = Alignment.Center,
-                        contentDescription = contentDescription,
-                        modifier = Modifier.fillMaxSize(),
-                    )
-                }
-            )
-        } else {
+        AsyncImage(
+            model = imageUrl,
+            contentScale = contentScale,
+            alignment = Alignment.TopCenter,
+            contentDescription = contentDescription,
+            modifier = Modifier.fillMaxSize(),
+            onLoading = { isLoadingOrError = true },
+            onSuccess = { isLoadingOrError = false },
+            onError = { isLoadingOrError = true },
+        )
+        if (isLoadingOrError) {
             Image(
                 painter = painterResource(QuottieIcons.LogoMono),
                 contentScale = ContentScale.Crop,

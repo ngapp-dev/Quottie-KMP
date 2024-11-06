@@ -32,6 +32,8 @@ kotlin {
             api(projects.core.model)
             implementation(libs.bundles.ktor)
             api(libs.kotlinx.serialization.json)
+            implementation(libs.coil)
+            implementation(libs.coil.network.ktor)
         }
 
         commonTest.dependencies {

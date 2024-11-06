@@ -37,7 +37,6 @@ kotlin {
             api(libs.webview)
 
             implementation(libs.bundles.moko)
-            implementation(libs.kamel)
             implementation(projects.resources)
         }
     }

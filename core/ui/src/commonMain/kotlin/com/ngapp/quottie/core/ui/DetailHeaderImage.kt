@@ -23,15 +23,18 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
 import com.ngapp.quottie.core.desingsystem.icon.QuottieIcons
 import dev.icerock.moko.resources.compose.painterResource
-import io.kamel.image.KamelImage
-import io.kamel.image.asyncPainterResource
 
 @Composable
 fun DetailHeaderImage(
@@ -41,36 +44,29 @@ fun DetailHeaderImage(
     clipShape: CornerBasedShape = MaterialTheme.shapes.medium,
     modifier: Modifier = Modifier
 ) {
+    var isLoadingOrError by remember { mutableStateOf(false) }
     val imageModifier = modifier
         .width(240.dp)
         .clip(clipShape)
 
     Box(modifier = imageModifier) {
-        if (!imageUrl.isNullOrEmpty()) {
-            KamelImage(
-                resource = asyncPainterResource(imageUrl),
+        AsyncImage(
+            model = imageUrl,
+            contentDescription = contentDescription,
+            contentScale = contentScale,
+            alignment = Alignment.TopCenter,
+            modifier = imageModifier.align(Alignment.Center),
+            onLoading = { isLoadingOrError = true },
+            onSuccess = { isLoadingOrError = false },
+            onError = { isLoadingOrError = true },
+        )
+        if (isLoadingOrError) {
+            Image(
+                painter = painterResource(QuottieIcons.LogoMono),
                 contentScale = contentScale,
                 alignment = Alignment.TopCenter,
                 contentDescription = contentDescription,
                 modifier = imageModifier.align(Alignment.Center),
-                onLoading = {
-                    Image(
-                        painter = painterResource(QuottieIcons.AccountCircleFilled),
-                        contentScale = contentScale,
-                        alignment = Alignment.TopCenter,
-                        contentDescription = contentDescription,
-                        modifier = imageModifier.align(Alignment.Center),
-                    )
-                }
-            )
-        } else {
-            Image(
-                painter = painterResource(QuottieIcons.AccountCircleFilled),
-                contentScale = contentScale,
-                alignment = Alignment.TopCenter,
-                contentDescription = contentDescription,
-                modifier = imageModifier
-                    .align(Alignment.Center),
             )
         }
     }

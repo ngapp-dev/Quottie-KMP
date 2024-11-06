@@ -43,8 +43,11 @@ kotlin {
 
             implementation(libs.paging.compose.common)
             implementation(libs.bundles.moko)
-            implementation(libs.kamel)
             implementation(libs.kottie.animation)
+            implementation(libs.coil)
+            implementation(libs.coil.compose.core)
+            implementation(libs.coil.compose)
+
             implementation(projects.core.common)
             implementation(projects.core.designsystem)
             implementation(projects.core.model)

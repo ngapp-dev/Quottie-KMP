@@ -32,7 +32,6 @@ internal fun KotlinMultiplatformExtension.configurePlatformTargets() {
             isStatic = true
         }
     }
-    @OptIn(ExperimentalKotlinGradlePluginApi::class)
     androidTarget {
         compilerOptions {
             jvmTarget.set(ConfigurationKeys.javaConfiguration.javaVmTarget)

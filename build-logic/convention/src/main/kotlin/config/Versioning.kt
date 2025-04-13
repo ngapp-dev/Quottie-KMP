@@ -18,12 +18,12 @@
 package config
 
 internal object Versioning {
-    const val ANDROID_COMPILE_SDK = 34
+    const val ANDROID_COMPILE_SDK = 35
     const val ANDROID_MIN_SDK = 24
-    const val ANDROID_TARGET_SDK = 34
+    const val ANDROID_TARGET_SDK = 35
     private const val VERSION_MAJOR = "1"
     private const val VERSION_MINOR = "0"
-    private const val VERSION_PATCH = "0"
+    private const val VERSION_PATCH = "1"
 
     val versionCode = VERSION_MAJOR.toInt() * 1000 + VERSION_MINOR.toInt() * 100 + VERSION_PATCH.toInt()
     val versionName = "$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH"

@@ -16,9 +16,6 @@
  */
 
 import com.ngapp.quottie.libs
-import gradle.kotlin.dsl.accessors._93bd701a7528465ddd1d441513f487f1.kotlin
-import gradle.kotlin.dsl.accessors._93bd701a7528465ddd1d441513f487f1.ksp
-import gradle.kotlin.dsl.accessors._93bd701a7528465ddd1d441513f487f1.sourceSets
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getting
 import org.gradle.kotlin.dsl.withType

@@ -45,7 +45,7 @@ class AuthorsViewModel(
         val authors = authorRepository.getAuthorsPaging(
             filter = ResultFilter(),
             slug = emptyList(),
-            pageSize = 20
+            pageSize = 25,
         )
         emit(Success(authors = authors))
     }

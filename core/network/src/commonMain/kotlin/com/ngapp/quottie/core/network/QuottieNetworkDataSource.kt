@@ -43,6 +43,8 @@ interface QuottieNetworkDataSource {
 
     suspend fun getRandomQuotes(pageSize: Int): HttpResponse
 
+    suspend fun getQuoteOfTheDay(): HttpResponse
+
     suspend fun getAuthorDetail(authorId: String): HttpResponse
 
     suspend fun getQuotes(

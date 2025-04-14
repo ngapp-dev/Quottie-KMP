@@ -65,6 +65,9 @@ internal class QuottieNetwork(
             parameter("limit", pageSize)
         }
 
+    override suspend fun getQuoteOfTheDay(): HttpResponse =
+        httpClient.get("$baseUrl/quotes/random")
+
     override suspend fun getAuthorDetail(authorId: String): HttpResponse =
         httpClient.get("$baseUrl/authors/$authorId")
 

@@ -50,7 +50,7 @@ val networkModule =
         }
         single<QuottieNetworkDataSource> {
             QuottieNetwork(
-                "https://api.quotable.io",
+                "https://api.quotable.kurokeita.dev/api",
                 httpClient = get()
             )
         }

@@ -17,6 +17,7 @@
 
 package com.ngapp.quottie.core.network.model.quote
 
+import com.ngapp.quottie.core.network.model.author.NetworkAuthor
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -25,9 +26,18 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class NetworkQuote(
-    @SerialName(value = "_id") val id: String = "",
+    @SerialName(value = "id") val id: String = "",
     val content: String = "",
-    val author: String = "",
+    val author: NetworkAuthor? = null,
     val length: Int = 0,
-    val tags: List<String> = emptyList(),
+    val tags: List<NetworkTag> = emptyList(),
+)
+
+/**
+ * Network representation of [TagResource]
+ */
+@Serializable
+data class NetworkTag(
+    @SerialName(value = "id") val id: String = "",
+    val name: String = "",
 )

@@ -17,6 +17,7 @@
 
 package com.ngapp.quottie.core.network.model.response
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
@@ -24,10 +25,17 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class NetworkResponse<T>(
-    val count: Int? = 0,
-    val totalCount: Int = 0,
-    val page: Int? = 0,
-    val totalPages: Int? = 0,
-    val lastItemIndex: Int? = null,
-    val results: List<T>
+    val data: List<T> = emptyList(),
+    val quotes: List<T> = emptyList(),
+    val quote: T? = null,
+    @SerialName(value = "metadata") val metaData: NetworkMetadata? = null,
+)
+
+@Serializable
+data class NetworkMetadata(
+    val total: Int = 0,
+    val page: Int = 0,
+    val lastPage: Int = 0,
+    val hasNextPage: Boolean = false,
+    val hasPreviousPage: Boolean = false,
 )

@@ -42,7 +42,7 @@ class QuotePagingSource(
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, QuoteResource> {
-        val page = params.key ?: 1
+        val page = params.key ?: 0
         return try {
             val response =
                 when {
@@ -70,7 +70,7 @@ class QuotePagingSource(
             }
             LoadResult.Page(
                 data = quoteList,
-                prevKey = if (page == 1) null else page - 1,
+                prevKey = if (page == 0) null else page - 1,
                 nextKey = if (quoteList.isEmpty()) null else page + 1
             )
         } catch (e: Exception) {

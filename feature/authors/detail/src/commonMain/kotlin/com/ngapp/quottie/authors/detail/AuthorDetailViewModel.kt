@@ -130,7 +130,7 @@ class AuthorDetailViewModel(
         return quoteRepository.getQuotesPaging(
             filter = ResultFilter(),
             slug = listOf(author.slug),
-            pageSize = 20
+            pageSize = 25,
         )
     }
 

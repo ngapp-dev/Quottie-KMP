@@ -84,7 +84,7 @@ class DefaultAuthorRepository(
             )
             val result = handleResponse(response) { it.body<NetworkResponse<NetworkAuthor>>() }
             if (result is Result.Success) {
-                emit(Result.Success(result.data.results.map(NetworkAuthor::asResource)))
+                emit(Result.Success(result.data.data.map(NetworkAuthor::asResource)))
             } else {
                 emit(Result.Error((result as Result.Error).error, result.exception))
             }
@@ -110,7 +110,7 @@ class DefaultAuthorRepository(
             )
             val result = handleResponse(response) { it.body<NetworkResponse<NetworkAuthor>>() }
             if (result is Result.Success) {
-                emit(Result.Success(result.data.results.map(NetworkAuthor::asResource)))
+                emit(Result.Success(result.data.data.map(NetworkAuthor::asResource)))
             } else {
                 emit(Result.Error((result as Result.Error).error, result.exception))
             }

@@ -55,9 +55,9 @@ class DefaultQuoteRepository(
         flow {
             try {
                 val response = quottieNetwork.getRandomQuotes(pageSize = pageSize)
-                val result = handleResponse(response) { it.body<List<NetworkQuote>>() }
+                val result = handleResponse(response) { it.body<NetworkResponse<NetworkQuote>>() }
                 if (result is Result.Success) {
-                    emit(Result.Success(result.data.map(NetworkQuote::asResource)))
+                    emit(Result.Success(result.data.quotes.map(NetworkQuote::asResource)))
                 } else {
                     emit(Result.Error((result as Result.Error).error, result.exception))
                 }
@@ -102,7 +102,7 @@ class DefaultQuoteRepository(
             )
             val result = handleResponse(response) { it.body<NetworkResponse<NetworkQuote>>() }
             if (result is Result.Success) {
-                emit(Result.Success(result.data.results.map(NetworkQuote::asResource)))
+                emit(Result.Success(result.data.data.map(NetworkQuote::asResource)))
             } else {
                 emit(Result.Error((result as Result.Error).error, result.exception))
             }
@@ -126,10 +126,9 @@ class DefaultQuoteRepository(
                 pageSize = pageSize,
                 page = page
             )
-            val result: Result<NetworkResponse<NetworkQuote>, DataError.Network> =
-                handleResponse(response) { it.body<NetworkResponse<NetworkQuote>>() }
+            val result = handleResponse(response) { it.body<NetworkResponse<NetworkQuote>>() }
             if (result is Result.Success) {
-                emit(Result.Success(result.data.results.map(NetworkQuote::asResource)))
+                emit(Result.Success(result.data.data.map(NetworkQuote::asResource)))
             } else {
                 emit(Result.Error((result as Result.Error).error, result.exception))
             }
@@ -152,11 +151,10 @@ class DefaultQuoteRepository(
             emit(Result.Success(savedQuote.asExternalModel()))
         } else {
             try {
-                val response = quottieNetwork.getRandomQuotes(pageSize = 1)
-                val result =
-                    handleResponse(response) { it.body<List<NetworkQuote>>() }
+                val response = quottieNetwork.getQuoteOfTheDay()
+                val result = handleResponse(response) { it.body<NetworkResponse<NetworkQuote>>() }
                 if (result is Result.Success) {
-                    val newQuote = result.data.first().asQuoteOfTheDayEntity()
+                    val newQuote = result.data.quote?.asQuoteOfTheDayEntity() ?: return@flow
                     quoteOfTheDayDao.replaceQuoteOfTheDay(
                         newQuote.copy(lastFetched = Clock.System.now())
                     )

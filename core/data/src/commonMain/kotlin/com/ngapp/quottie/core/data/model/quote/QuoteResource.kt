@@ -20,19 +20,20 @@ package com.ngapp.quottie.core.data.model.quote
 import com.ngapp.quottie.core.database.model.quote.QuoteOfTheDayEntity
 import com.ngapp.quottie.core.model.quote.QuoteResource
 import com.ngapp.quottie.core.network.model.quote.NetworkQuote
+import com.ngapp.quottie.core.network.model.quote.NetworkTag
 
 fun NetworkQuote.asResource() = QuoteResource(
     id = id,
     content = content,
-    author = author,
+    author = author?.name.orEmpty(),
     length = length,
-    tags = tags,
+    tags = tags.map(NetworkTag::name),
 )
 
 fun NetworkQuote.asQuoteOfTheDayEntity() = QuoteOfTheDayEntity(
     id = id,
     content = content,
-    author = author,
+    author = author?.name.orEmpty(),
     length = length,
-    tags = tags,
+    tags = tags.map(NetworkTag::name),
 )

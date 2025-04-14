@@ -25,11 +25,11 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class NetworkAuthor(
-    @SerialName(value = "_id") val id: String,
+    @SerialName(value = "id") val id: String,
     val bio: String = "",
     val description: String? = "",
     val link: String = "",
     val name: String = "",
     val slug: String = "",
-    val quoteCount: Int = 0,
+    @SerialName(value = "quotesCount") val quoteCount: Int = 0,
 )

@@ -66,7 +66,10 @@ import com.ngapp.quottie.bookmarks.state.BookmarksTabs
 import com.ngapp.quottie.bookmarks.state.BookmarksTabs.AUTHORS
 import com.ngapp.quottie.bookmarks.state.BookmarksTabs.QUOTES
 import com.ngapp.quottie.bookmarks.state.BookmarksUiState
+import com.ngapp.quottie.core.analytics.AnalyticsHelper
+import com.ngapp.quottie.core.analytics.LocalAnalyticsHelper
 import com.ngapp.quottie.core.analytics.TrackScreenViewEvent
+import com.ngapp.quottie.core.analytics.logAuthorResourceOpened
 import com.ngapp.quottie.core.desingsystem.component.QuottieTabRow
 import com.ngapp.quottie.core.desingsystem.component.QuottieText
 import com.ngapp.quottie.core.desingsystem.component.scrollbar.DraggableScrollbar
@@ -141,6 +144,7 @@ private fun BookmarksScreen(
         initialPage = selectedTab.ordinal
     )
     val coroutineScope = rememberCoroutineScope()
+    val analyticsHelper = LocalAnalyticsHelper.current
 
     when (uiState) {
         is BookmarksUiState.Loading -> Unit
@@ -188,6 +192,7 @@ private fun BookmarksScreen(
                         ) {
                             when (page) {
                                 AUTHORS.ordinal -> authorsPage(
+                                    analyticsHelper = analyticsHelper,
                                     authors = uiState.authors,
                                     onNavigateAuthors = onNavigateAuthors,
                                     onClick = onAuthorClick
@@ -229,6 +234,7 @@ private fun BookmarksScreen(
 }
 
 private fun LazyGridScope.authorsPage(
+    analyticsHelper: AnalyticsHelper,
     authors: List<AuthorResource>,
     onNavigateAuthors: () -> Unit,
     onClick: (String) -> Unit,
@@ -270,6 +276,10 @@ private fun LazyGridScope.authorsPage(
             LaunchedEffect(author.isBookmarked) {
                 isBookmark = author.isBookmarked
             }
+            analyticsHelper.logAuthorResourceOpened(
+                authorId = author.id,
+                authorName = author.name,
+            )
             AuthorResourceCard(
                 author = author,
                 onClick = { onClick(author.id) },

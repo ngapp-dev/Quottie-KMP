@@ -17,8 +17,8 @@
 
 package com.ngapp.quottie.core.analytics.di
 
-import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.Firebase
+import com.google.firebase.analytics.analytics
 import com.ngapp.quottie.core.analytics.FirebaseAnalyticsHelper
 import com.ngapp.quottie.core.analytics.StubAnalyticsHelper
 import com.ngapp.quottie.core.common.util.isDebug

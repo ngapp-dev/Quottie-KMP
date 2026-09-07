@@ -18,12 +18,12 @@
 package com.ngapp.quottie
 
 import android.app.Application
+import com.google.firebase.Firebase
 import com.google.firebase.FirebaseApp
-import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.analytics.analytics
 import com.google.firebase.appcheck.FirebaseAppCheck
 import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
-import com.google.firebase.crashlytics.ktx.crashlytics
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.crashlytics.crashlytics
 import com.ngapp.quottie.core.analytics.CrashlyticsAntilog
 import com.ngapp.quottie.core.common.util.isDebug
 import com.ngapp.quottie.di.appModules

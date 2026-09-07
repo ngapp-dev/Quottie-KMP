@@ -16,13 +16,8 @@
  */
 
 import com.ngapp.quottie.libs
-import gradle.kotlin.dsl.accessors._93bd701a7528465ddd1d441513f487f1.kotlin
-import gradle.kotlin.dsl.accessors._93bd701a7528465ddd1d441513f487f1.ksp
-import gradle.kotlin.dsl.accessors._93bd701a7528465ddd1d441513f487f1.sourceSets
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getting
-import org.gradle.kotlin.dsl.withType
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
     id("com.google.devtools.ksp")
@@ -32,8 +27,6 @@ plugins {
 kotlin {
     sourceSets {
         val commonMain by getting {
-            kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
-
             dependencies {
                 api(libs.findLibrary("koin-core").get())
                 api(libs.findLibrary("koin-annotations").get())
@@ -47,22 +40,6 @@ kotlin {
 
 dependencies {
     add("kspCommonMainMetadata", libs.findLibrary("koin-compiler").get())
-}
-
-// WORKAROUND: ADD this dependsOn("kspCommonMainKotlinMetadata") instead of above dependencies
-tasks.withType<KotlinCompilationTask<*>>().configureEach {
-    if (name != "kspCommonMainKotlinMetadata") {
-        dependsOn("kspCommonMainKotlinMetadata")
-    }
-}
-
-afterEvaluate {
-    tasks.filter {
-        it.name.contains("SourcesJar", true)
-    }.forEach {
-        println("SourceJarTask====>${it.name}")
-        it.dependsOn("kspCommonMainKotlinMetadata")
-    }
 }
 
 ksp {

@@ -17,7 +17,6 @@
 
 package com.ngapp.quottie.core.ui
 
-import KottieAnimation
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -45,9 +44,10 @@ import com.ngapp.quottie.SharedRes
 import com.ngapp.quottie.core.desingsystem.component.QuottieText
 import dev.icerock.moko.resources.compose.readTextAsState
 import dev.icerock.moko.resources.compose.stringResource
-import kottieComposition.KottieCompositionSpec
-import kottieComposition.animateKottieCompositionAsState
-import kottieComposition.rememberKottieComposition
+import kottie.KottieAnimation
+import kottie.KottieCompositionSpec
+import kottie.animateKottieCompositionAsState
+import kottie.rememberKottieComposition
 
 @Composable
 fun ErrorView(

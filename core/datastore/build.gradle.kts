@@ -32,6 +32,13 @@ kotlin {
             implementation(projects.core.common)
             implementation(libs.bundles.moko)
         }
+        commonTest.dependencies {
+            implementation(libs.bundles.test.multiplatform)
+            implementation(libs.okio.fakefilesystem)
+        }
+        androidInstrumentedTest.dependencies {
+            implementation(libs.bundles.test.instrumented)
+        }
     }
 }
 

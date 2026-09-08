@@ -39,6 +39,9 @@ kotlin {
         androidUnitTest.dependencies {
             implementation(libs.bundles.test)
         }
+        androidInstrumentedTest.dependencies {
+            implementation(libs.bundles.test.instrumented)
+        }
     }
 }
 

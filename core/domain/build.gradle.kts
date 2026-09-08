@@ -30,6 +30,7 @@ kotlin {
             implementation(libs.bundles.test.multiplatform)
             implementation(projects.core.model)
             implementation(projects.core.common)
+            implementation(libs.paging.compose.common)
         }
     }
 }

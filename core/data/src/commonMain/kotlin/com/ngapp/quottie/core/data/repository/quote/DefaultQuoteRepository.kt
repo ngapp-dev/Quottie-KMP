@@ -38,6 +38,7 @@ import com.ngapp.quottie.core.network.model.response.NetworkResponse
 import com.ngapp.quottie.core.network.util.handleError
 import com.ngapp.quottie.core.network.util.handleResponse
 import io.ktor.client.call.body
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
@@ -61,6 +62,8 @@ class DefaultQuoteRepository(
                 } else {
                     emit(Result.Error((result as Result.Error).error, result.exception))
                 }
+            } catch (e: CancellationException) {
+                throw e
             } catch (e: Exception) {
                 emit(handleError(e))
             }
@@ -106,6 +109,8 @@ class DefaultQuoteRepository(
             } else {
                 emit(Result.Error((result as Result.Error).error, result.exception))
             }
+        } catch (e: CancellationException) {
+            throw e
         } catch (e: Exception) {
             emit(handleError(e))
         }
@@ -133,6 +138,8 @@ class DefaultQuoteRepository(
             } else {
                 emit(Result.Error((result as Result.Error).error, result.exception))
             }
+        } catch (e: CancellationException) {
+            throw e
         } catch (e: Exception) {
             emit(handleError(e))
         }
@@ -164,6 +171,8 @@ class DefaultQuoteRepository(
                 } else {
                     emit(Result.Error((result as Result.Error).error, result.exception))
                 }
+            } catch (e: CancellationException) {
+                throw e
             } catch (e: Exception) {
                 emit(handleError(e))
             }

@@ -48,5 +48,8 @@ kotlin {
             implementation(projects.core.ui)
             implementation(projects.core.analytics)
         }
+        commonTest.dependencies {
+            implementation(libs.bundles.test.multiplatform)
+        }
     }
 }

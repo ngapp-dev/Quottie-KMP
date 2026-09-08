@@ -40,5 +40,6 @@ internal fun BaseExtension.configureDefaultConfig() {
         targetSdk = ConfigurationKeys.sdkConfiguration.targetSdk
         versionCode = Versioning.versionCode
         versionName = Versioning.versionName
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 }

@@ -53,5 +53,11 @@ kotlin {
             implementation(projects.core.model)
             implementation(projects.resources)
         }
+
+        androidInstrumentedTest.dependencies {
+            implementation(libs.bundles.test.instrumented)
+            implementation(libs.compose.ui.test.junit4)
+            implementation(libs.compose.ui.test.manifest)
+        }
     }
 }

@@ -57,13 +57,13 @@ val networkModule =
         }
         single<WikipediaNetworkDataSource> {
             WikipediaNetwork(
-                baseUrl = "https://en.wikipedia.org",
+                baseUrl = BuildKonfig.WIKIPEDIA_API_BASE_URL,
                 httpClient = get()
             )
         }
         single<GithubNetworkDataSource> {
             GithubNetwork(
-                baseUrl = "https://api.github.com",
+                baseUrl = BuildKonfig.GITHUB_API_BASE_URL,
                 httpClient = get()
             )
         }

@@ -20,6 +20,7 @@ package com.ngapp.quottie.search
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
+import app.cash.paging.cachedIn
 import com.ngapp.quottie.core.analytics.AnalyticsEvent
 import com.ngapp.quottie.core.analytics.AnalyticsEvent.Param
 import com.ngapp.quottie.core.analytics.AnalyticsHelper
@@ -140,6 +141,7 @@ class SearchViewModel(
             .distinctUntilChanged()
             .debounce(500)
             .onEach { onSearchTriggered(searchQuery.value) }
+            .cachedIn(viewModelScope)
 
         val searchQuotes = quoteRepository.getQuotesPaging(
             filter = ResultFilter(searchQuery = searchQuery.value),
@@ -149,6 +151,7 @@ class SearchViewModel(
             .distinctUntilChanged()
             .debounce(500)
             .onEach { onSearchTriggered(searchQuery.value) }
+            .cachedIn(viewModelScope)
 
         emit(SearchResultUiState.Success(searchAuthors, searchQuotes))
     }

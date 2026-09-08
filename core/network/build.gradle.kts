@@ -79,7 +79,7 @@ buildkonfig {
             name = "QUOTABLE_API_BASE_URL",
             value = secretsProperties.getProperty(
                 "QUOTABLE_API",
-                "https://quotable-api.ngapps-developer.workers.dev",
+                "https://api.quotable.io",
             ),
         )
         buildConfigField(

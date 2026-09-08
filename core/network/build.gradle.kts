@@ -77,17 +77,20 @@ buildkonfig {
         buildConfigField(
             type = Type.STRING,
             name = "QUOTABLE_API_BASE_URL",
-            value = secretsProperties.getProperty("QUOTABLE_API", "https://api.quotable.io"),
+            value = secretsProperties.getProperty(
+                "QUOTABLE_API",
+                "https://quotable-api.ngapps-developer.workers.dev",
+            ),
         )
         buildConfigField(
             type = Type.STRING,
             name = "WIKIPEDIA_API_BASE_URL",
-            value = secretsProperties.getProperty("WIKIPEDIA_API", ""),
+            value = secretsProperties.getProperty("WIKIPEDIA_API", "https://en.wikipedia.org"),
         )
         buildConfigField(
             type = Type.STRING,
             name = "GITHUB_API_BASE_URL",
-            value = secretsProperties.getProperty("GITHUB_API", ""),
+            value = secretsProperties.getProperty("GITHUB_API", "https://api.github.com"),
         )
     }
 }

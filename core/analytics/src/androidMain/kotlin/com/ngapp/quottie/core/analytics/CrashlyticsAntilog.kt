@@ -17,8 +17,8 @@
 
 package com.ngapp.quottie.core.analytics
 
-import com.google.firebase.crashlytics.ktx.crashlytics
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.Firebase
+import com.google.firebase.crashlytics.crashlytics
 import io.github.aakira.napier.Antilog
 import io.github.aakira.napier.LogLevel
 

@@ -46,5 +46,9 @@ kotlin {
             implementation(projects.core.ui)
             implementation(projects.core.analytics)
         }
+        androidInstrumentedTest.dependencies {
+            implementation(libs.bundles.test.instrumented)
+            implementation(libs.paging.compose.common)
+        }
     }
 }

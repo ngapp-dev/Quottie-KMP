@@ -44,6 +44,9 @@ kotlin {
             implementation(libs.navigation.compose)
             implementation(libs.bundles.moko)
         }
+        commonTest.dependencies {
+            implementation(libs.bundles.test.multiplatform)
+        }
     }
 }
 

@@ -1,0 +1,61 @@
+/*
+ * Copyright 2024 NGApps Dev (https://github.com/ngapp-dev). All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.ngapp.quottie.core.database.converter
+
+import kotlinx.datetime.Instant
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
+
+class InstantConverterTest {
+
+    private val converter = InstantConverter()
+
+    @Test
+    fun longToInstant_convertsEpochMillisecondsToInstant() {
+        val instant = converter.longToInstant(1_700_000_000_000)
+
+        assertEquals(Instant.fromEpochMilliseconds(1_700_000_000_000), instant)
+    }
+
+    @Test
+    fun longToInstant_withNull_returnsNull() {
+        assertNull(converter.longToInstant(null))
+    }
+
+    @Test
+    fun instantToLong_convertsInstantToEpochMilliseconds() {
+        val instant = Instant.fromEpochMilliseconds(1_700_000_000_000)
+
+        assertEquals(1_700_000_000_000, converter.instantToLong(instant))
+    }
+
+    @Test
+    fun instantToLong_withNull_returnsNull() {
+        assertNull(converter.instantToLong(null))
+    }
+
+    @Test
+    fun roundTrip_preservesInstant() {
+        val instant = Instant.fromEpochMilliseconds(1_234_567_890)
+
+        val roundTripped = converter.longToInstant(converter.instantToLong(instant))
+
+        assertEquals(instant, roundTripped)
+    }
+}

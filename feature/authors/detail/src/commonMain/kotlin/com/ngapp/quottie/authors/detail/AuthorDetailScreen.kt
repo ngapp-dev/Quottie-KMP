@@ -38,7 +38,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -128,7 +127,7 @@ private fun AuthorDetailScreen(
         }
 
         is AuthorDetailUiState.Success -> {
-            val quotesPaging by rememberUpdatedState(uiState.authorQuotes.collectAsLazyPagingItems())
+            val quotesPaging = uiState.authorQuotes.collectAsLazyPagingItems()
             val state = rememberLazyGridState()
             val author = uiState.author
             var isAuthorBookmarked by rememberSaveable { mutableStateOf(author.isBookmarked) }
@@ -227,4 +226,3 @@ private fun AuthorDetailScreen(
     }
     TrackScreenViewEvent(screenName = "AuthorDetailScreen")
 }
-

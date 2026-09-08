@@ -35,6 +35,11 @@ kotlin {
             implementation(libs.bundles.ktor)
             implementation(libs.paging.compose.common)
         }
+        commonTest.dependencies {
+            implementation(libs.bundles.test.multiplatform)
+            implementation(libs.ktor.client.mock)
+            implementation(libs.okio.fakefilesystem)
+        }
     }
 }
 

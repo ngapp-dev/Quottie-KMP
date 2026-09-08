@@ -32,8 +32,9 @@ import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -48,6 +49,7 @@ import com.ngapp.quottie.core.desingsystem.component.scrollbar.rememberDraggable
 import com.ngapp.quottie.core.desingsystem.component.scrollbar.scrollbarState
 import com.ngapp.quottie.core.ui.AuthorResourceCard
 import com.ngapp.quottie.core.ui.PagingGrid
+import kotlinx.coroutines.flow.distinctUntilChanged
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -61,6 +63,9 @@ internal fun AuthorsRoute(
     AuthorsScreen(
         modifier = modifier,
         uiState = uiState,
+        initialFirstVisibleItemIndex = viewModel.firstVisibleItemIndex,
+        initialFirstVisibleItemScrollOffset = viewModel.firstVisibleItemScrollOffset,
+        onScrollPositionChanged = viewModel::onScrollPositionChanged,
         onAuthorClick = onAuthorClick,
     )
 }
@@ -69,6 +74,9 @@ internal fun AuthorsRoute(
 private fun AuthorsScreen(
     modifier: Modifier,
     uiState: AuthorsUiState,
+    initialFirstVisibleItemIndex: Int,
+    initialFirstVisibleItemScrollOffset: Int,
+    onScrollPositionChanged: (Int, Int) -> Unit,
     onAuthorClick: (String) -> Unit,
 ) {
     val analyticsHelper = LocalAnalyticsHelper.current
@@ -85,8 +93,24 @@ private fun AuthorsScreen(
         }
 
         is AuthorsUiState.Success -> {
-            val authorsPaging by rememberUpdatedState(uiState.authors.collectAsLazyPagingItems())
-            val state = rememberLazyGridState()
+            val authorsPaging = uiState.authors.collectAsLazyPagingItems()
+            val state = rememberLazyGridState(
+                initialFirstVisibleItemIndex = initialFirstVisibleItemIndex,
+                initialFirstVisibleItemScrollOffset = initialFirstVisibleItemScrollOffset,
+            )
+
+            LaunchedEffect(state) {
+                snapshotFlow {
+                    state.firstVisibleItemIndex to state.firstVisibleItemScrollOffset
+                }
+                    .distinctUntilChanged()
+                    .collect { (firstVisibleItemIndex, firstVisibleItemScrollOffset) ->
+                        onScrollPositionChanged(
+                            firstVisibleItemIndex,
+                            firstVisibleItemScrollOffset,
+                        )
+                    }
+            }
 
             Box(modifier = Modifier.fillMaxSize()) {
                 PagingGrid(
@@ -100,6 +124,10 @@ private fun AuthorsScreen(
                                 analyticsHelper.logAuthorResourceOpened(
                                     authorId = author.id,
                                     authorName = author.name,
+                                )
+                                onScrollPositionChanged(
+                                    state.firstVisibleItemIndex,
+                                    state.firstVisibleItemScrollOffset,
                                 )
                                 onAuthorClick(author.id)
                             },

@@ -15,6 +15,9 @@
  * limitations under the License.
  */
 
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type
+import java.util.Properties
+
 plugins {
     id("kmp-library-plugin")
     alias(libs.plugins.ksp)
@@ -22,6 +25,7 @@ plugins {
     id("koin-plugin-setup")
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.secrets)
+    alias(libs.plugins.buildkonfig.plugin)
 }
 
 kotlin {
@@ -38,6 +42,7 @@ kotlin {
 
         commonTest.dependencies {
             implementation(libs.bundles.test.multiplatform)
+            implementation(libs.ktor.client.mock)
         }
 
         androidMain.dependencies {
@@ -52,5 +57,40 @@ kotlin {
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
         }
+    }
+}
+
+// Base URLs are read from secrets.properties (gitignored, local to each machine) so they can be
+// overridden per-developer without touching source, and fall back to the real backends so the
+// project still builds for anyone without that file. Exposed via BuildKonfig (unlike the
+// Android-only `secrets` plugin BuildConfig above) so commonMain code - including iOS - can see it.
+val secretsProperties = Properties().apply {
+    val secretsFile = rootProject.file("secrets.properties")
+    if (secretsFile.exists()) {
+        secretsFile.inputStream().use { load(it) }
+    }
+}
+
+buildkonfig {
+    packageName = "com.ngapp.quottie.core.network"
+    defaultConfigs {
+        buildConfigField(
+            type = Type.STRING,
+            name = "QUOTABLE_API_BASE_URL",
+            value = secretsProperties.getProperty(
+                "QUOTABLE_API",
+                "https://api.quotable.io",
+            ),
+        )
+        buildConfigField(
+            type = Type.STRING,
+            name = "WIKIPEDIA_API_BASE_URL",
+            value = secretsProperties.getProperty("WIKIPEDIA_API", "https://en.wikipedia.org"),
+        )
+        buildConfigField(
+            type = Type.STRING,
+            name = "GITHUB_API_BASE_URL",
+            value = secretsProperties.getProperty("GITHUB_API", "https://api.github.com"),
+        )
     }
 }

@@ -17,6 +17,7 @@
 
 package com.ngapp.quottie.core.network.di
 
+import com.ngapp.quottie.core.network.BuildKonfig
 import com.ngapp.quottie.core.network.GithubNetworkDataSource
 import com.ngapp.quottie.core.network.QuottieNetworkDataSource
 import com.ngapp.quottie.core.network.WikipediaNetworkDataSource
@@ -50,19 +51,19 @@ val networkModule =
         }
         single<QuottieNetworkDataSource> {
             QuottieNetwork(
-                "https://api.quotable.io",
+                BuildKonfig.QUOTABLE_API_BASE_URL,
                 httpClient = get()
             )
         }
         single<WikipediaNetworkDataSource> {
             WikipediaNetwork(
-                baseUrl = "https://en.wikipedia.org",
+                baseUrl = BuildKonfig.WIKIPEDIA_API_BASE_URL,
                 httpClient = get()
             )
         }
         single<GithubNetworkDataSource> {
             GithubNetwork(
-                baseUrl = "https://api.github.com",
+                baseUrl = BuildKonfig.GITHUB_API_BASE_URL,
                 httpClient = get()
             )
         }

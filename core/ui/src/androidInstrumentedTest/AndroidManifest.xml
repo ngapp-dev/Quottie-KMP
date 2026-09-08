@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2024 NGApps Dev (https://github.com/ngapp-dev). All rights reserved.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+      This module (transitively, via core:ui) depends on the Google Mobile Ads SDK, whose
+      MobileAdsInitProvider crashes the instrumented test process at startup unless this
+      meta-data is present. Google's publicly documented sample/test AdMob App ID is used here
+      (https://developers.google.com/admob/android/test-ads) - the real app supplies its own
+      via a manifest placeholder, which isn't available in this isolated test APK.
+    -->
+    <application>
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713" />
+    </application>
+</manifest>

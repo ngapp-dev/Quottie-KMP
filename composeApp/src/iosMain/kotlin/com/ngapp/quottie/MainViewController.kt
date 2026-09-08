@@ -15,12 +15,47 @@
  * limitations under the License.
  */
 
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.window.ComposeUIViewController
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.ngapp.quottie.MainActivityUiState
+import com.ngapp.quottie.MainActivityUiState.Loading
+import com.ngapp.quottie.MainActivityUiState.Success
+import com.ngapp.quottie.MainActivityViewModel
+import com.ngapp.quottie.core.desingsystem.theme.QuottieTheme
+import com.ngapp.quottie.core.model.DarkThemeConfig
 import com.ngapp.quottie.ui.QuottieApp
 import com.ngapp.quottie.ui.rememberQuottieAppState
+import org.koin.compose.viewmodel.koinViewModel
 
 fun MainViewController() = ComposeUIViewController(
     configure = { enforceStrictPlistSanityCheck = false }
 ) {
-    QuottieApp(rememberQuottieAppState())
+    IosQuottieApp()
+}
+
+@Composable
+private fun IosQuottieApp(
+    viewModel: MainActivityViewModel = koinViewModel(),
+) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val darkTheme = shouldUseDarkTheme(uiState)
+
+    QuottieTheme(darkTheme = darkTheme) {
+        QuottieApp(rememberQuottieAppState())
+    }
+}
+
+@Composable
+private fun shouldUseDarkTheme(
+    uiState: MainActivityUiState,
+): Boolean = when (uiState) {
+    Loading -> isSystemInDarkTheme()
+    is Success -> when (uiState.userData.darkThemeConfig) {
+        DarkThemeConfig.FOLLOW_SYSTEM -> isSystemInDarkTheme()
+        DarkThemeConfig.LIGHT -> false
+        DarkThemeConfig.DARK -> true
+    }
 }

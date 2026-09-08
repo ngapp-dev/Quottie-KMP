@@ -21,6 +21,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import app.cash.paging.PagingData
+import app.cash.paging.cachedIn
 import com.ngapp.quottie.authors.detail.navigation.AuthorDetailNavigationRoute
 import com.ngapp.quottie.authors.detail.state.AuthorDetailAction
 import com.ngapp.quottie.authors.detail.state.AuthorDetailEvent
@@ -131,7 +132,7 @@ class AuthorDetailViewModel(
             filter = ResultFilter(),
             slug = listOf(author.slug),
             pageSize = 20
-        )
+        ).cachedIn(viewModelScope)
     }
 
     private suspend fun <T> handleCommonError(result: Result.Error<T, Error>) {

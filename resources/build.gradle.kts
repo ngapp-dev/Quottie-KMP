@@ -31,6 +31,9 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.moko.core)
             implementation(libs.moko.compose)
+            implementation("org.jetbrains.compose.runtime:runtime:${libs.versions.composePlugin.get()}")
+            implementation("org.jetbrains.compose.foundation:foundation:${libs.versions.composePlugin.get()}")
+            implementation("org.jetbrains.compose.ui:ui:${libs.versions.composePlugin.get()}")
         }
         androidMain.get().dependsOn(commonMain.get())
         iosMain.get().dependsOn(commonMain.get())

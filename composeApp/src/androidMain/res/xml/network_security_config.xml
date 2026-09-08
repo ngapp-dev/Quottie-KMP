@@ -16,9 +16,9 @@
   ~ limitations under the License.
   -->
 
-<network-security-config>
-    <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">https://api.quotable.io</domain>
-        <domain includeSubdomains="true">http://api.quotable.io</domain>
-    </domain-config>
-</network-security-config>
+<!--
+  The Quotable API now lives behind quotable-api.ngapps-developer.workers.dev, which is
+  HTTPS-only (Cloudflare Workers), so no cleartext domain exception is needed for it and this
+  file intentionally has none. It is kept only because AndroidManifest.xml still references it.
+-->
+<network-security-config />

@@ -19,6 +19,7 @@ package com.ngapp.quottie.authors.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import app.cash.paging.cachedIn
 import com.ngapp.quottie.authors.list.state.AuthorsUiState
 import com.ngapp.quottie.authors.list.state.AuthorsUiState.Loading
 import com.ngapp.quottie.authors.list.state.AuthorsUiState.Success
@@ -27,12 +28,29 @@ import com.ngapp.quottie.core.model.resultfilter.ResultFilter
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 
 class AuthorsViewModel(
     private val authorRepository: AuthorRepository,
 ) : ViewModel() {
+
+    var firstVisibleItemIndex: Int = 0
+        private set
+
+    var firstVisibleItemScrollOffset: Int = 0
+        private set
+
+    private val authors = flow {
+        emitAll(
+            authorRepository.getAuthorsPaging(
+                filter = ResultFilter(),
+                slug = emptyList(),
+                pageSize = 20
+            )
+        )
+    }.cachedIn(viewModelScope)
 
     val uiState: StateFlow<AuthorsUiState> = authorsUiState()
         .stateIn(
@@ -42,14 +60,15 @@ class AuthorsViewModel(
         )
 
     private fun authorsUiState(): Flow<AuthorsUiState> = flow {
-        val authors = authorRepository.getAuthorsPaging(
-            filter = ResultFilter(),
-            slug = emptyList(),
-            pageSize = 20
-        )
         emit(Success(authors = authors))
     }
+
+    fun onScrollPositionChanged(
+        firstVisibleItemIndex: Int,
+        firstVisibleItemScrollOffset: Int,
+    ) {
+        this.firstVisibleItemIndex = firstVisibleItemIndex
+        this.firstVisibleItemScrollOffset = firstVisibleItemScrollOffset
+    }
 }
-
-
 

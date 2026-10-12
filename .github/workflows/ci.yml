@@ -1,0 +1,118 @@
+name: CI
+
+on:
+  # All pull requests, including stacked ones that target another feature branch.
+  pull_request:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  GRADLE_OPTS: -Dorg.gradle.jvmargs=-Xmx6g
+
+jobs:
+  android:
+    name: Android
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: zulu
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      # secrets.properties is gitignored, but the Secrets Gradle plugin fails without it.
+      # Google's public test AdMob ids are enough to build and test.
+      - name: Create stub secrets.properties
+        run: |
+          cat > secrets.properties <<'EOF'
+          ADS_ID_KEY=ca-app-pub-3940256099942544~3347511713
+          MAIN_BANNER_AD_ID_KEY=ca-app-pub-3940256099942544/6300978111
+          ADS_TEST_DEVICE_ID=ci-placeholder
+          EOF
+
+      - name: Build
+        run: ./gradlew :androidApp:assembleDebug
+
+      - name: Unit tests
+        run: ./gradlew testAndroidHostTest
+
+      - name: Lint
+        run: ./gradlew :androidApp:lintDebug
+
+      - name: Upload reports
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-reports
+          path: '**/build/reports/'
+
+  ios:
+    name: iOS
+    runs-on: macos-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: zulu
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      # The Kotlin/Native toolchain and its dependencies (~1 GB) live in ~/.konan, outside
+      # Gradle's cache. Keyed on the versions file, which pins the Kotlin version.
+      - name: Cache Kotlin/Native
+        uses: actions/cache@v4
+        with:
+          path: ~/.konan
+          key: konan-${{ runner.os }}-${{ hashFiles('gradle/libs.versions.toml') }}
+          restore-keys: konan-${{ runner.os }}-
+
+      # Swift packages (Lottie) resolved by xcodebuild.
+      - name: Cache Swift packages
+        uses: actions/cache@v4
+        with:
+          path: ~/spm-packages
+          key: spm-${{ hashFiles('iosApp/QuottieKMP.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
+          restore-keys: spm-
+
+      # The Secrets Gradle plugin is configured in :androidApp, which is part of every build.
+      - name: Create stub secrets.properties
+        run: |
+          cat > secrets.properties <<'EOF'
+          ADS_ID_KEY=ca-app-pub-3940256099942544~3347511713
+          MAIN_BANNER_AD_ID_KEY=ca-app-pub-3940256099942544/6300978111
+          ADS_TEST_DEVICE_ID=ci-placeholder
+          EOF
+
+      - name: Compile shared code for iOS
+        run: ./gradlew :composeApp:compileKotlinIosArm64
+
+      # Device build without signing: runners have no physical devices, and the app is tested
+      # on a real iPhone, not on the simulator. The build phase embeds the Kotlin framework.
+      - name: Build iOS app
+        run: |
+          xcodebuild build \
+            -project iosApp/QuottieKMP.xcodeproj \
+            -scheme QuottieKMP \
+            -configuration Debug \
+            -destination 'generic/platform=iOS' \
+            -clonedSourcePackagesDirPath ~/spm-packages \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Upload reports
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-reports
+          path: '**/build/reports/'

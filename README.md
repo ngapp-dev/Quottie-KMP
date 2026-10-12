@@ -1,3 +1,4 @@
+[![CI](https://github.com/ngapp-dev/Quottie-KMP/actions/workflows/ci.yml/badge.svg)](https://github.com/ngapp-dev/Quottie-KMP/actions/workflows/ci.yml)
 ![gradle-version](https://img.shields.io/badge/gradle-9.8.1-brightgreen?logo=gradle)
 ![agp-version](https://img.shields.io/badge/AGP-9.4.1-brightgreen?logo=android)
 ![kotlin-version](https://img.shields.io/badge/kotlin-2.4.21-blue?logo=kotlin)

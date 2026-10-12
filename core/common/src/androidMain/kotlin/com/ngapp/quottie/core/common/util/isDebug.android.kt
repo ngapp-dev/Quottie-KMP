@@ -17,6 +17,13 @@
 
 package com.ngapp.quottie.core.common.util
 
-import com.ngapp.quottiecommon.BuildConfig
+actual val isDebug: Boolean
+    get() = AndroidBuildType.isDebug
 
-actual val isDebug = BuildConfig.DEBUG
+/**
+ * KMP Android library modules have no debug/release variants (and no BuildConfig) under AGP 9,
+ * so the app module reports its own BuildConfig.DEBUG here before anything reads [isDebug].
+ */
+object AndroidBuildType {
+    var isDebug: Boolean = false
+}

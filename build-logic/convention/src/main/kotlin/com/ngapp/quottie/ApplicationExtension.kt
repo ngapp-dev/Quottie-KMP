@@ -17,9 +17,35 @@
 
 package com.ngapp.quottie
 
-import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
+import com.android.build.api.dsl.ApplicationExtension
+import config.ConfigurationKeys
+import config.Versioning
 
-internal fun BaseAppModuleExtension.configureBuildTypes() {
+internal fun ApplicationExtension.configureDefaultConfig() {
+    compileSdk = ConfigurationKeys.sdkConfiguration.compileSdk
+    defaultConfig {
+        minSdk = ConfigurationKeys.sdkConfiguration.minSdk
+        targetSdk = ConfigurationKeys.sdkConfiguration.targetSdk
+        versionCode = Versioning.versionCode
+        versionName = Versioning.versionName
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+}
+
+internal fun ApplicationExtension.configureCompileOptions() {
+    compileOptions {
+        sourceCompatibility = ConfigurationKeys.javaConfiguration.version
+        targetCompatibility = ConfigurationKeys.javaConfiguration.version
+    }
+}
+
+internal fun ApplicationExtension.configureTestOptions() {
+    testOptions {
+        unitTests.isReturnDefaultValues = ConfigurationKeys.HAS_UNIT_TESTS_DEFAULT_VALUES
+    }
+}
+
+internal fun ApplicationExtension.configureBuildTypes() {
     buildTypes {
         debug {
             applicationIdSuffix = QuottieBuildType.DEBUG.applicationIdSuffix

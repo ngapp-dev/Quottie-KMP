@@ -15,36 +15,21 @@
  * limitations under the License.
  */
 
+// Shared app UI (navigation, DI graph, root composable) and the iOS framework. The Android
+// application itself lives in :androidApp.
 plugins {
-    id("kmp-app-plugin")
-    id("kotlin-parcelize")
-    id("com.google.firebase.crashlytics")
-    alias(libs.plugins.google.services)
+    id("kmp-library-plugin")
     alias(libs.plugins.ksp)
     alias(libs.plugins.jetbrains.compose)
-    alias(libs.plugins.buildkonfig.plugin)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.secrets)
-}
-
-android {
-    buildFeatures {
-        buildConfig = true
-    }
 }
 
 kotlin {
     sourceSets {
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
-            implementation(libs.androidx.activity.compose)
-            implementation(libs.koin.android)
             implementation(compose.preview)
-            implementation(libs.androidx.core.splashscreen)
-            implementation(libs.google.play.app.update)
-            implementation(libs.google.play.app.update.ktx)
-            implementation(libs.google.play.review)
         }
         iosMain.dependencies {
             implementation(libs.koin.core)
@@ -89,13 +74,4 @@ kotlin {
             implementation(projects.core.analytics)
         }
     }
-}
-
-buildkonfig {
-    packageName = "com.ngapp.quottie"
-    defaultConfigs {}
-}
-
-secrets {
-    propertiesFileName = "secrets.properties"
 }

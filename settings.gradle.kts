@@ -39,6 +39,7 @@ rootProject.name = "Quottie"
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
+    include(":androidApp")
     include(":composeApp")
     include(":resources")
 

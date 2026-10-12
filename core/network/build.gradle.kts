@@ -50,7 +50,7 @@ kotlin {
             implementation(libs.koin.android)
         }
 
-        androidUnitTest.dependencies {
+        androidHostTest.dependencies {
             implementation(libs.bundles.test)
         }
 

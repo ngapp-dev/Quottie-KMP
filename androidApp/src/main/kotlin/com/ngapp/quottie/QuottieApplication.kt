@@ -25,6 +25,7 @@ import com.google.firebase.appcheck.FirebaseAppCheck
 import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
 import com.google.firebase.crashlytics.crashlytics
 import com.ngapp.quottie.core.analytics.CrashlyticsAntilog
+import com.ngapp.quottie.core.common.util.AndroidBuildType
 import com.ngapp.quottie.core.common.util.isDebug
 import com.ngapp.quottie.di.appModules
 import com.ngapp.quottie.di.featureModules
@@ -37,6 +38,7 @@ import org.koin.core.lazyModules
 class QuottieApplication : Application() {
     override fun onCreate() {
         super.onCreate()
+        AndroidBuildType.isDebug = BuildConfig.DEBUG
 
         FirebaseApp.initializeApp(applicationContext)
         val firebaseAppCheck = FirebaseAppCheck.getInstance()

@@ -36,10 +36,10 @@ kotlin {
         commonTest.dependencies {
             implementation(libs.bundles.test.multiplatform)
         }
-        androidUnitTest.dependencies {
+        androidHostTest.dependencies {
             implementation(libs.bundles.test)
         }
-        androidInstrumentedTest.dependencies {
+        androidDeviceTest.dependencies {
             implementation(libs.bundles.test.instrumented)
         }
     }

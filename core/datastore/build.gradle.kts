@@ -36,7 +36,7 @@ kotlin {
             implementation(libs.bundles.test.multiplatform)
             implementation(libs.okio.fakefilesystem)
         }
-        androidInstrumentedTest.dependencies {
+        androidDeviceTest.dependencies {
             implementation(libs.bundles.test.instrumented)
         }
     }

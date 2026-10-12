@@ -18,19 +18,17 @@
 import com.ngapp.quottie.configureBuildTypes
 import com.ngapp.quottie.configureCompileOptions
 import com.ngapp.quottie.configureDefaultConfig
-import com.ngapp.quottie.configurePlatformTargets
 import com.ngapp.quottie.configureTestOptions
 import config.ConfigurationKeys
 
+// Android entry point of the app. AGP 9 compiles Kotlin itself (built-in Kotlin), so no Kotlin
+// plugin is applied here; the shared code lives in the :composeApp KMP library.
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.multiplatform")
     id("kover-app-plugin")
-    id("detekt-plugin-setup")
 }
 
 android {
-    compileSdk = ConfigurationKeys.sdkConfiguration.compileSdk
     namespace = ConfigurationKeys.APPLICATION_ID
 
     defaultConfig {
@@ -44,5 +42,7 @@ android {
 }
 
 kotlin {
-    configurePlatformTargets()
+    compilerOptions {
+        jvmTarget.set(ConfigurationKeys.javaConfiguration.javaVmTarget)
+    }
 }

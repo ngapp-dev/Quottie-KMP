@@ -1,7 +1,7 @@
 [versions]
 adaptive = "1.2.0"
 adaptiveNavigationSuite = "1.9.0"
-androidGradlePlugin = "8.13.0"
+androidGradlePlugin = "9.4.1"
 androidxActivity = "1.13.0"
 androidxArch = "2.2.0"
 androidxCoreSplashscreen = "1.2.0"

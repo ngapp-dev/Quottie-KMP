@@ -15,29 +15,22 @@
  * limitations under the License.
  */
 
-import config.ConfigurationKeys
-import com.ngapp.quottie.configureCompileOptions
-import com.ngapp.quottie.configureDefaultConfig
 import com.ngapp.quottie.configurePlatformTargets
-import com.ngapp.quottie.configureTestOptions
 
 plugins {
     id("org.jetbrains.kotlin.multiplatform")
-    id("com.android.library")
+    id("com.android.kotlin.multiplatform.library")
     id("org.jetbrains.kotlinx.kover")
     id("detekt-plugin-setup")
 }
 
-android {
-    compileSdk = ConfigurationKeys.sdkConfiguration.compileSdk
-
-    configureDefaultConfig()
-    configureCompileOptions()
-    configureTestOptions()
-
-    namespace = ConfigurationKeys.APPLICATION_ID.plus(name)
+kotlin {
+    configurePlatformTargets(project)
 }
 
-kotlin {
-    configurePlatformTargets()
+// Compose Multiplatform doesn't configure this task's outputDirectory for the KMP Android
+// library device-test component, which fails assembleAndroidTest. The app uses moko-resources,
+// not Compose resources, so device tests have nothing to copy.
+tasks.matching { it.name == "copyAndroidDeviceTestComposeResourcesToAndroidAssets" }.configureEach {
+    enabled = false
 }

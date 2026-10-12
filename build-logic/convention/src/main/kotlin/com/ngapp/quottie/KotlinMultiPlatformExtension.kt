@@ -17,11 +17,12 @@
 
 package com.ngapp.quottie
 
+import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
 import config.ConfigurationKeys
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
-internal fun KotlinMultiplatformExtension.configurePlatformTargets() {
+internal fun KotlinMultiplatformExtension.configurePlatformTargets(project: Project) {
     listOf(
         iosArm64(),
         iosSimulatorArm64()
@@ -31,10 +32,24 @@ internal fun KotlinMultiplatformExtension.configurePlatformTargets() {
             isStatic = true
         }
     }
-    @OptIn(ExperimentalKotlinGradlePluginApi::class)
-    androidTarget {
+    targets.withType(KotlinMultiplatformAndroidLibraryTarget::class.java).configureEach {
+        namespace = ConfigurationKeys.APPLICATION_ID.plus(project.name)
+        compileSdk = ConfigurationKeys.sdkConfiguration.compileSdk
+        minSdk = ConfigurationKeys.sdkConfiguration.minSdk
         compilerOptions {
             jvmTarget.set(ConfigurationKeys.javaConfiguration.javaVmTarget)
+        }
+        // Unlike com.android.library, the KMP Android library target has no test compilations
+        // unless they are enabled explicitly: host tests run commonTest on the JVM
+        // (testAndroidHostTest), device tests run src/androidDeviceTest on a device.
+        withHostTest {
+            isReturnDefaultValues = ConfigurationKeys.HAS_UNIT_TESTS_DEFAULT_VALUES
+            // Puts the R classes of dependencies on the test classpath: moko's SharedRes
+            // references resources.R, which host tests can't load otherwise.
+            isIncludeAndroidResources = true
+        }
+        withDeviceTest {
+            instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
     }
 }

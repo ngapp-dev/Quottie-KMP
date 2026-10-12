@@ -22,11 +22,11 @@ plugins {
     alias(libs.plugins.moko.plugin)
 }
 
-android {
-    namespace = "resources"
-}
 
 kotlin {
+    android {
+        namespace = "resources"
+    }
     sourceSets {
         commonMain.dependencies {
             implementation(libs.moko.core)

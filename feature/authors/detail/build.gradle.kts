@@ -48,7 +48,7 @@ kotlin {
             implementation(projects.core.ui)
             implementation(projects.core.analytics)
         }
-        androidInstrumentedTest.dependencies {
+        androidDeviceTest.dependencies {
             implementation(libs.bundles.test.instrumented)
         }
     }

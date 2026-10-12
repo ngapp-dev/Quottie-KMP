@@ -58,5 +58,5 @@ kover {
 }
 
 tasks.register("coverageReport") {
-    dependsOn(":composeApp:koverHtmlReportDebug")
+    dependsOn(":androidApp:koverHtmlReportDebug")
 }

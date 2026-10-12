@@ -15,18 +15,14 @@
  * limitations under the License.
  */
 
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type
+import java.util.Properties
+
 plugins {
     id("kmp-library-plugin")
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.secrets)
-    id("kotlin-parcelize")
-}
-
-android {
-    buildFeatures {
-        buildConfig = true
-    }
+    alias(libs.plugins.buildkonfig.plugin)
 }
 
 kotlin {
@@ -50,6 +46,33 @@ kotlin {
     }
 }
 
-secrets {
-    propertiesFileName = "secrets.properties"
+// KMP Android library modules have no BuildConfig under AGP 9, so the ad ids from
+// secrets.properties are exposed through BuildKonfig instead. Without the file, they fall back to
+// Google's public test ids so the project still builds.
+val secretsProperties = Properties().apply {
+    val secretsFile = rootProject.file("secrets.properties")
+    if (secretsFile.exists()) {
+        secretsFile.inputStream().use { load(it) }
+    }
+}
+
+buildkonfig {
+    packageName = "com.ngapp.quottie.core.common"
+    // Public (BuildKonfig is internal by default): core:ui reads the ad ids.
+    exposeObjectWithName = "CommonBuildKonfig"
+    defaultConfigs {
+        buildConfigField(
+            type = Type.STRING,
+            name = "MAIN_BANNER_AD_ID_KEY",
+            value = secretsProperties.getProperty(
+                "MAIN_BANNER_AD_ID_KEY",
+                "ca-app-pub-3940256099942544/6300978111",
+            ),
+        )
+        buildConfigField(
+            type = Type.STRING,
+            name = "ADS_TEST_DEVICE_ID",
+            value = secretsProperties.getProperty("ADS_TEST_DEVICE_ID", ""),
+        )
+    }
 }

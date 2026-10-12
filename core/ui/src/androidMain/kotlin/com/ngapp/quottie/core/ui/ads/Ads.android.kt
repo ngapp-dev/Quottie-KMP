@@ -27,7 +27,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
-import com.ngapp.quottiecommon.BuildConfig
+import com.ngapp.quottie.core.common.CommonBuildKonfig
 
 @SuppressLint("MissingPermission")
 @Composable
@@ -36,7 +36,7 @@ actual fun LoadBannerAd() {
     val adView = remember {
         AdView(context).apply {
             setAdSize(AdSize.BANNER)
-            adUnitId = BuildConfig.MAIN_BANNER_AD_ID_KEY
+            adUnitId = CommonBuildKonfig.MAIN_BANNER_AD_ID_KEY
             loadAd(AdRequest.Builder().build())
         }
     }

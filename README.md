@@ -1,5 +1,8 @@
-![Android Gradle Plugin](https://img.shields.io/badge/Compose_Multiplatform-1.7.0-brightgreen)
-![kotlin-version](https://img.shields.io/badge/kotlin-2.0.20-blue?logo=kotlin)
+![gradle-version](https://img.shields.io/badge/gradle-9.8.1-brightgreen?logo=gradle)
+![agp-version](https://img.shields.io/badge/AGP-9.4.1-brightgreen?logo=android)
+![kotlin-version](https://img.shields.io/badge/kotlin-2.4.21-blue?logo=kotlin)
+![compose-multiplatform](https://img.shields.io/badge/Compose%20Multiplatform-1.12.1-4285F4?logo=jetpackcompose)
+![platforms](https://img.shields.io/badge/platforms-Android%20%7C%20iOS-lightgrey)
 
 ![Quottie: Quote of the Day](docs/images/quottie_logo_long.png "Quottie: Quote of the Day")
 
@@ -45,32 +48,74 @@ Build a personalized collection of quotes and authors that resonate with you. Wi
 </p>
 
 ## Libraries used
-- 🧩 [Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform) - for UI
-- 🌐 [Ktor](https://github.com/ktorio/ktor) - for networking
-- 📦 [Kotlinx Serialization](https://github.com/Kotlin/kotlinx.serialization) - for content negotiation
-- 🧭 [Compose Navigation](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-navigation-routing.html) - for navigation
-- 💉 [Koin](https://github.com/InsertKoinIO/koin) - for dependency injection
-- 🗃️ [Data Store](https://developer.android.com/jetpack/androidx/releases/datastore) - for storage
-- 🛢️ [Room](https://developer.android.com/jetpack/androidx/releases/datastore) - for databasing
-- 🏞️ [Moko Resources](https://github.com/icerockdev/moko-resources) - for crossplatform resources
-- 🧾 [Napier](https://github.com/AAkira/Napier) - for logging
+
+Types: **KMP** - multiplatform library used from shared code (`commonMain`, Android and iOS), **Android** - Android-only library (`androidMain` / `androidApp`), **Gradle plugin** - build tooling, **Test** - test-only dependency.
+
+| | Library | Version | Type | Used for |
+|---|---|---|---|---|
+| 🧬 | [Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform.html) | 2.4.21 | Gradle plugin | sharing code between Android and iOS |
+| 🧩 | [Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform) | 1.12.1 | KMP | shared UI |
+| 📐 | [Material 3 Adaptive](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-adaptive-layouts.html) | 1.3.0 | KMP | adaptive layouts and navigation suite |
+| 🧭 | [Navigation Compose](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-navigation-routing.html) | 2.9.2 | KMP | navigation |
+| ♻️ | [Lifecycle ViewModel](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-viewmodel.html) | 2.11.0 | KMP | shared ViewModels |
+| 🌐 | [Ktor](https://ktor.io/) | 3.6.0 | KMP | networking (OkHttp engine on Android, Darwin on iOS) |
+| 📦 | [Kotlinx Serialization](https://github.com/Kotlin/kotlinx.serialization) | 1.11.0 | KMP | content negotiation |
+| ⚡ | [Kotlinx Coroutines](https://github.com/Kotlin/kotlinx.coroutines) | 1.11.0 | KMP | asynchronous work |
+| 🕒 | [Kotlinx Datetime](https://github.com/Kotlin/kotlinx-datetime) | 0.8.0 | KMP | dates and time |
+| 💉 | [Koin](https://insert-koin.io/) | 4.2.2 | KMP | dependency injection |
+| 🗃️ | [DataStore](https://developer.android.com/kotlin/multiplatform/datastore) + [Wire](https://github.com/square/wire) | 1.2.1 / 7.1.0 | KMP | storing user preferences in Protobuf |
+| 🛢️ | [Room](https://developer.android.com/kotlin/multiplatform/room) + [SQLite Bundled](https://developer.android.com/kotlin/multiplatform/sqlite) | 2.8.5 / 2.7.1 | KMP | databasing |
+| 📃 | [Paging (Cash App)](https://github.com/cashapp/multiplatform-paging) | 3.3.0-alpha02-0.5.1 | KMP | paginated quote and author lists |
+| 🏞️ | [Coil 3](https://github.com/coil-kt/coil) | 3.6.3 | KMP | loading images |
+| 🌍 | [moko-resources](https://github.com/icerockdev/moko-resources) | 0.26.4 | KMP | shared strings, images, fonts and files |
+| 🎞️ | [Kottie](https://github.com/ismai117/kottie) | 2.3.0 | KMP | Lottie animations |
+| 🪟 | [Compose WebView Multiplatform](https://github.com/KevinnZou/compose-webview-multiplatform) | 2.0.3 | KMP | privacy policy and terms screens |
+| 🧾 | [Napier](https://github.com/AAkira/Napier) | 2.7.1 | KMP | logging |
+| 🚀 | [Core Splashscreen](https://developer.android.com/develop/ui/views/launch/splash-screen) | 1.2.0 | Android | splash screen |
+| ⬆️ | [Play In-App Updates](https://developer.android.com/guide/playcore/in-app-updates) / [In-App Review](https://developer.android.com/guide/playcore/in-app-review) | 2.1.0 / 2.0.2 | Android | app updates and reviews |
+| 🛠️ | [Android Gradle Plugin](https://developer.android.com/build/releases/gradle-plugin) | 9.4.1 | Gradle plugin | Android build (`com.android.kotlin.multiplatform.library` for shared modules) |
+| ⚙️ | [KSP](https://github.com/google/ksp) | 2.3.12 | Gradle plugin | Room and Koin code generation |
+| 🔑 | [BuildKonfig](https://github.com/yshrsmz/BuildKonfig) | 0.23.0 | Gradle plugin | build config for shared code (API base URLs, ad ids) |
+| 🔍 | [Detekt](https://github.com/detekt/detekt) / [Kover](https://github.com/Kotlin/kotlinx-kover) | 1.23.8 / 0.9.11 | Gradle plugin | static analysis and code coverage |
+| 🧪 | [Kotlin Test](https://kotlinlang.org/api/core/kotlin-test/), [Turbine](https://github.com/cashapp/turbine), [Ktor MockEngine](https://ktor.io/docs/client-testing.html), [Okio FakeFileSystem](https://square.github.io/okio/) | | Test | unit tests |
+| 📱 | [AndroidX Test](https://developer.android.com/training/testing) / [Compose UI Test](https://developer.android.com/develop/ui/compose/testing) | 1.7.0 / 1.12.1 | Test | instrumented tests |
+
+The full list of versions is in [`gradle/libs.versions.toml`](gradle/libs.versions.toml). The project builds with Gradle 9.8.1 and JDK 17+.
 
 ## Services used
-- 📊 [Firebase Analytics](https://github.com/firebase/firebase-android-sdk) - for analytics logging
-- 🔎 [Firebase Crashlytics](https://github.com/firebase/firebase-android-sdk) - for crashlytics logging
-- 🔒 [Google UMP](https://developers.google.com/interactive-media-ads/docs/sdks/android/client-side/consent) - for showing consent screen
-- 📢 [Google AdMob](https://developers.google.com/admob/android/sdk) - for showing ads
+- 📊 [Firebase Analytics](https://github.com/firebase/firebase-android-sdk) - for analytics logging (Android)
+- 🔎 [Firebase Crashlytics](https://github.com/firebase/firebase-android-sdk) - for crashlytics logging (Android)
+- 🔒 [Google UMP](https://developers.google.com/admob/ump/android/quick-start) - for showing consent screen (Android)
+- 📢 [Google AdMob](https://developers.google.com/admob/android/sdk) - for showing ads (Android)
+- 💬 [Quotable](https://github.com/lukePeavey/quotable) - quotes and authors API, served from a [Cloudflare Workers](https://workers.cloudflare.com/) mirror
+- 📖 [Wikipedia API](https://www.mediawiki.org/wiki/API:Main_page) - for author details
+- 🐙 [GitHub API](https://docs.github.com/en/rest) - for the developer profile on the About screen
 
 ## Architecture
 
-The **Quottie: Your Personal Quote Companion** app follows the official architecture guidance which is described in detail in the [Now in Android app architecture learning journey](https://github.com/android/nowinandroid/blob/main/docs/ArchitectureLearningJourney.md).
+The **Quottie: Your Personal Quote Companion** app follows the official architecture guidance which is described in detail in the [Now in Android app architecture learning journey](https://github.com/android/nowinandroid/blob/main/docs/ArchitectureLearningJourney.md), adapted to Kotlin Multiplatform.
+
+The project uses convention plugins in `build-logic` and a modularized structure:
+- 🤖 `androidApp` - the Android application: `MainActivity`, `Application`, manifest, Firebase setup
+- 📱 `composeApp` - the shared application shell: root composable, navigation host, Koin modules, and the iOS framework
+- 🍏 `iosApp` - the iOS application (Xcode project) that hosts the shared Compose UI
+- 🧱 `core:*` - shared KMP modules: analytics, common, data, database, datastore, design system, domain, model, network, UI components
+- 🧩 `feature:*` - one KMP module per feature, with its UI, ViewModel and state in `commonMain`
+- 🌍 `resources` - shared strings, images and fonts
+
+Platform-specific code, such as ads, analytics and sharing, lives in `androidMain` and `iosMain` behind `expect`/`actual` declarations.
+
+## Tests
+
+- `./gradlew testAndroidHostTest` - unit tests of the shared modules (`commonTest`), run on the JVM
+- `./gradlew connectedAndroidDeviceTest` - instrumented tests (`androidDeviceTest`): Room DAOs, DataStore, ViewModels and Compose UI, run on a device or emulator
 
 ## UI
 The app was designed using [Material 3 guidelines](https://m3.material.io/).
 
-The Screens and UI elements are built entirely using [Jetpack Compose](https://developer.android.com/jetpack/compose).
+The screens and UI elements are built entirely with [Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform), so the same UI runs on Android and iOS.
 
-The app has theme modes, light and dark
+The app has theme modes, light and dark.
 
 ## Author
 

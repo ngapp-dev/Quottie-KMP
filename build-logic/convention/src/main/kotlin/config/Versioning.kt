@@ -18,7 +18,7 @@
 package config
 
 internal object Versioning {
-    const val ANDROID_COMPILE_SDK = 36
+    const val ANDROID_COMPILE_SDK = 37
     const val ANDROID_MIN_SDK = 24
     const val ANDROID_TARGET_SDK = 36
     private const val VERSION_MAJOR = "1"

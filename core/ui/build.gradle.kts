@@ -19,8 +19,6 @@ plugins {
     id("kmp-library-plugin")
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.compose.compiler)
-    kotlin("multiplatform")
-    id("kotlin-parcelize")
     id("koin-plugin-setup")
 }
 
@@ -54,7 +52,7 @@ kotlin {
             implementation(projects.resources)
         }
 
-        androidInstrumentedTest.dependencies {
+        androidDeviceTest.dependencies {
             implementation(libs.bundles.test.instrumented)
             implementation(libs.compose.ui.test.junit4)
             implementation(libs.compose.ui.test.manifest)

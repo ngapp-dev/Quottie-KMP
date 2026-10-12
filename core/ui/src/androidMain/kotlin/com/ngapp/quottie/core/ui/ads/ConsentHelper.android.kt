@@ -23,9 +23,10 @@ import com.google.android.ump.ConsentDebugSettings
 import com.google.android.ump.ConsentInformation
 import com.google.android.ump.ConsentRequestParameters
 import com.google.android.ump.UserMessagingPlatform
+import com.ngapp.quottie.core.common.CommonBuildKonfig
+import com.ngapp.quottie.core.common.util.isDebug
 import com.ngapp.quottie.core.ui.UiAndroidPlatformContextProvider
 import com.ngapp.quottie.core.ui.UiAndroidPlatformContextProvider.getActivity
-import com.ngapp.quottiecommon.BuildConfig
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -62,10 +63,10 @@ actual class ConsentHelper {
     }
 
     actual fun obtainConsentAndShow() {
-        val params = if (BuildConfig.DEBUG) {
+        val params = if (isDebug) {
             val debugSettings = ConsentDebugSettings.Builder(context)
                 .setDebugGeography(ConsentDebugSettings.DebugGeography.DEBUG_GEOGRAPHY_EEA)
-                .addTestDeviceHashedId(BuildConfig.ADS_TEST_DEVICE_ID)
+                .addTestDeviceHashedId(CommonBuildKonfig.ADS_TEST_DEVICE_ID)
                 .build()
             ConsentRequestParameters
                 .Builder()

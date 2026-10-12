@@ -22,10 +22,10 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
 }
-android {
-    namespace = "com.ngapp.quottie.feature.search"
-}
 kotlin {
+    android {
+        namespace = "com.ngapp.quottie.feature.search"
+    }
     sourceSets {
         commonMain.dependencies {
             implementation(compose.ui)
